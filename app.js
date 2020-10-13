@@ -18,7 +18,7 @@ const bookingRouter = require('./routes/bookingRoutes');
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
 
-//Global - Middleware----
+//Global - Middleware---- Start express app
 const app = express();
 
 //Setting up the view engine
