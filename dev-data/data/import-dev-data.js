@@ -45,7 +45,7 @@ const importData = async () => {
     //console.log(result);
     process.exit();
   } catch (err) {
-    console.log(err);
+    //console.log(err);
   }
   process.exit();
 };
@@ -56,10 +56,10 @@ const deleteData = async () => {
     await Tour.deleteMany();
     await User.deleteMany();
     await Review.deleteMany();
-    console.log('Data Deleted');
+    //console.log('Data Deleted');
     //console.log(result);
   } catch (err) {
-    console.log(err);
+    //console.log(err);
   }
   process.exit();
 };
@@ -72,4 +72,4 @@ if (process.argv[2] === '--import') {
   deleteData();
 }
 
-console.log(process.argv);
+//console.log(process.argv);

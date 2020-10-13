@@ -8649,16 +8649,16 @@ var bookTour = /*#__PURE__*/function () {
             });
 
           case 6:
-            _context.next = 12;
+            _context.next = 11;
             break;
 
           case 8:
             _context.prev = 8;
             _context.t0 = _context["catch"](0);
-            console.log(_context.t0);
+            //console.log(err);
             (0, _alerts.showAlert)('error', _context.t0);
 
-          case 12:
+          case 11:
           case "end":
             return _context.stop();
         }

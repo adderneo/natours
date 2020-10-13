@@ -4,9 +4,7 @@ const dotenv = require('dotenv');
 // Uncaught exception
 process.on('uncaughtException', (err) => {
   console.log(err.name, err.message);
-  console.log(
-    'Uncaught exception: 🚀🚀🚀🚀🚀Shutting down the application.'
-  );
+  console.log('Uncaught exception: 🚀🚀🚀🚀🚀Shutting down the application.');
   process.exit(1);
 });
 
@@ -51,9 +49,7 @@ const server = app.listen(port, () => {
 //Unhandled rejection -Process object emit unhadled rejection
 process.on('unhandledRejection', (err) => {
   console.log(`${err.name}, ${err.message}`);
-  console.log(
-    'Unhandled rejection: 🚀🚀🚀🚀🚀Shutting down the application.'
-  );
+  console.log('Unhandled rejection: 🚀🚀🚀🚀🚀Shutting down the application.');
   //Shut down the application -0 success, -1 uncalled exception - We user server.close to complete the pending task and close the process softly
   server.close(() => {
     process.exit(1);

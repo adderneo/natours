@@ -8,6 +8,8 @@ const xssClean = require('xss-clean');
 const hpp = require('hpp');
 //NPM package to parse the cookie
 const cookieParser = require('cookie-parser');
+//NPM package to compless content-type
+const compression = require('compression');
 
 // Routes
 const tourRouter = require('./routes/tourRoutes');
@@ -72,6 +74,8 @@ app.use(
     ],
   })
 );
+
+app.use(compression());
 
 //Test Middleware
 app.use((req, res, next) => {
