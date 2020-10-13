@@ -1,0 +1,5 @@
+{
+  "singleQuote": true,
+  "printWidth": 80,
+  "_commment_ESLINT_Recepie": "npm i eslint prettier eslint-config-prettier eslint-plugin-prettier eslint-config-airbnb eslint-plugin-node eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react --save-dev"
+}

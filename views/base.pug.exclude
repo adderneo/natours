@@ -1,0 +1,22 @@
+doctype html
+html
+    head
+        title Natours | #{tour}
+        //- interpolation
+        link(rel='stylesheet' href='css/style.css')
+        link(rel='shortcut icon' type='image' href='img/favicon.png')
+
+    body
+        h1= tour    
+        //- This is called buffered code
+
+        //- //- This will not be visible in html rendering but // this will
+
+        //- We can also java script here insted of buffered code -- After equal everything is treated as js
+        h2= user.toUpperCase()
+        
+        //-Unbuffred code
+        - const x = 9;
+        h3= 2*x
+
+        p this is a new tour
