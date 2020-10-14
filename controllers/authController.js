@@ -12,27 +12,24 @@ const signToken = (id) => {
   });
 };
 
-const createAndSendToken = (user, message, statusCode, res) => {
+const createAndSendToken = (user, message, statusCode, req, res) => {
   //Created JWT Token and added the parameters from config file.
   const token = signToken(user._id);
 
-  //Remove the password from user -- Only for sign up
-  user.password = undefined;
-
   //Send JWT via cookie //CookieOption Object
-  const cookieOptions = {
-    secure: false,
+  res.cookie('jwt', token, {
     expires: new Date(
       Date.now() + process.env.JWT_COOKIE_EXPIRES_IN + 24 * 60 * 60 * 1000
     ),
     httpOnly: true,
-  };
+    secure: req.secure || req.headers('x-forwarded-proto') === 'https',
+  });
 
-  //Only in production secure option is true
-  if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
+  //Only in production secure option is true - Heroku Specific
+  // if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
 
-  //Set Cookie
-  res.cookie('jwt', token, cookieOptions);
+  //Remove the password from user -- Only for sign up
+  user.password = undefined;
 
   res.status(statusCode).json({
     status: 'success',
@@ -56,7 +53,7 @@ exports.signup = catchAsync(async (req, res, next) => {
   const url = `${req.protocol}://${req.get('host')}/me`;
   await new Email(newUser, url).sendWelcome();
 
-  createAndSendToken(newUser, 'User registered successfully', 201, res);
+  createAndSendToken(newUser, 'User registered successfully', 201, req, res);
 });
 
 exports.login = catchAsync(async (req, res, next) => {
@@ -73,7 +70,7 @@ exports.login = catchAsync(async (req, res, next) => {
     return next(new AppError('Incorrect email or password.', 401));
   }
   // 3. If everything is correct send the token to the client
-  createAndSendToken(user, 'success', 200, res);
+  createAndSendToken(user, 'success', 200, req, res);
 });
 
 // Logout user
@@ -244,7 +241,7 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
   await user.save();
 
   //4. Log the user In (Send the JSON token to the client).
-  createAndSendToken(user, 'Password Reset successfull', 201, res);
+  createAndSendToken(user, 'Password Reset successfull', 201, req, res);
 });
 
 //Change password functionality for a logged in user //Always ask for the current Password for authentication.
@@ -270,5 +267,5 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
   await user.save();
 
   //4. Log user in send JWT
-  createAndSendToken(user, 'Password changed.', 201, res);
+  createAndSendToken(user, 'Password changed.', 201, req, res);
 });

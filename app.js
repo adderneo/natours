@@ -23,6 +23,9 @@ const globalErrorHandler = require('./controllers/errorController');
 //Global - Middleware---- Start express app
 const app = express();
 
+//Enable proxy especially for heroku
+app.enable('trust proxy');
+
 //Setting up the view engine
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
