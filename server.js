@@ -56,7 +56,7 @@ process.on('unhandledRejection', (err) => {
   });
 });
 
-//Heroku shut down free application tier evry 24 hours, SIGTERM is the signal which is cached to shutdown the server gracefully.
+//Heroku shut down free application tier evry 24 hours, SIGTERM is the signal which is cached to shutdown the server gracefully.git
 process.on('SIGTERM', () => {
   console.log('👽 🖖SIGTERM RECEIVED, Shutting down gracefully.');
   server.close(() => {
