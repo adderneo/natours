@@ -8573,7 +8573,7 @@ var updateSettings = /*#__PURE__*/function () {
         switch (_context.prev = _context.next) {
           case 0:
             _context.prev = 0;
-            url = type === 'password' ? 'http://127.0.0.1:8000/api/v1/users/updatePassword' : 'http://127.0.0.1:8000/api/v1/users/updateMe';
+            url = type === 'password' ? '/api/v1/users/updatePassword' : '/api/v1/users/updateMe';
             _context.next = 4;
             return (0, _axios.default)({
               method: 'PATCH',
@@ -8639,7 +8639,7 @@ var bookTour = /*#__PURE__*/function () {
           case 0:
             _context.prev = 0;
             _context.next = 3;
-            return (0, _axios.default)("http://127.0.0.1:8000/api/v1/bookings/checkout-session/".concat(tourId));
+            return (0, _axios.default)("/api/v1/bookings/checkout-session/".concat(tourId));
 
           case 3:
             session = _context.sent;
