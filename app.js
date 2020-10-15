@@ -10,6 +10,7 @@ const hpp = require('hpp');
 const cookieParser = require('cookie-parser');
 //NPM package to compless content-type
 const compression = require('compression');
+const cors = require('cors');
 
 // Routes
 const tourRouter = require('./routes/tourRoutes');
@@ -29,6 +30,18 @@ app.enable('trust proxy');
 //Setting up the view engine
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
+
+//Implementing cors : We can also use the same on any url specifically type cors() in endpoint router
+app.use(cors());
+//Manage different origins using cors //Access-Control-Allow-Origin - //api.naturs.com front end natours.com
+// app.use(
+//   cors({
+//     origin: 'https://natours.com',
+//   })
+// );
+
+app.options('*', cors());
+//app.options('/api/v1/tours/:id', cors());
 
 //Middleware for securing http headers
 //serving static files using express //We don't need public folder in URL, If there is no route is defined it automatically look for root.
