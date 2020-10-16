@@ -8,7 +8,7 @@ const xssClean = require('xss-clean');
 const hpp = require('hpp');
 //NPM package to parse the cookie
 const cookieParser = require('cookie-parser');
-//const bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
 //NPM package to compless content-type
 const compression = require('compression');
 const cors = require('cors');
@@ -69,7 +69,7 @@ app.use('/api', limeter);
 //Stripe payment web hook URL //It will received as stream it will converted to JSON use exxpress parser insted of body-parser
 app.post(
   '/webhook-checkout',
-  express.raw({ type: 'application/json' }),
+  bodyParser.raw({ type: 'application/json' }),
   bookingController.webHookCheckout
 );
 
