@@ -77,7 +77,7 @@ exports.webHookCheckout = catchAsync(async (req, res, next) => {
     return res.status(400).send(`Webhook Eroor: ${err.message}`);
   }
 
-  if (event.type === 'checkout.session.completed')
+  if (event.type === 'checkout.session.complete')
     createBookingCheckout(event.data.object);
 
   res.status(200).json({ received: true });
