@@ -6,16 +6,16 @@ const bookingController = require('../controllers/bookingController');
 
 const router = express.Router();
 
-router.get(
-  '/',
-  bookingController.createBookingCheckout,
-  authController.loggedIn,
-  viewsController.getOverview
-);
+router.get('/', authController.loggedIn, viewsController.getOverview);
 router.get('/tour/:slug', authController.loggedIn, viewsController.getTour);
 router.get('/login', authController.loggedIn, viewsController.getLoginForm);
 router.get('/me', authController.protect, viewsController.getAccount);
-router.get('/my-tours', authController.protect, viewsController.getMyTours);
+router.get(
+  '/my-tours',
+  //bookingController.createBookingCheckout,
+  authController.protect,
+  viewsController.getMyTours
+);
 
 // A separate route for receving html form URL encoded data - Normal method to update the data
 router.post(

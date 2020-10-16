@@ -8,6 +8,7 @@ const xssClean = require('xss-clean');
 const hpp = require('hpp');
 //NPM package to parse the cookie
 const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
 //NPM package to compless content-type
 const compression = require('compression');
 const cors = require('cors');
@@ -18,6 +19,7 @@ const userRouter = require('./routes/userRoutes');
 const viewRouter = require('./routes/viewRoutes');
 const reviewRouter = require('./routes/reviewRoutes');
 const bookingRouter = require('./routes/bookingRoutes');
+const bookingController = require('./controllers/bookingController');
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
 
@@ -63,6 +65,15 @@ const limeter = rateLimit({
 });
 
 app.use('/api', limeter);
+
+//Stripe payment web hook URL //It will received as stream it will converted to JSON
+app.post(
+  '/webhook-checkout',
+  bodyParser.raw({ type: 'application/json' }),
+  bookingController.webHookCheckout
+);
+
+app.use(express.raw());
 
 //Body Parser middleware - Reading data from the body of the request into req.body
 app.use(express.json({ limit: '10kb' }));
