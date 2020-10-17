@@ -20,7 +20,7 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
     // }&user=${req.user.id}&price=${tour.price}`,
 
     //Production way
-    success_url: `${req.protocol}://${req.get('host')}/my-tours/`,
+    success_url: `${req.protocol}://${req.get('host')}/my-tours?alert=booking`,
 
     //Querystrings aren't secure for these type of data .. we use webhooks in last
     cancel_url: `${req.protocol}://${req.get('host')}/tour/${tour.slug}/`,

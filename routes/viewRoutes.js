@@ -6,6 +6,9 @@ const authController = require('../controllers/authController');
 
 const router = express.Router();
 
+//Middle for quaryString
+router.use(viewsController.alerts);
+
 router.get('/', authController.loggedIn, viewsController.getOverview);
 router.get('/tour/:slug', authController.loggedIn, viewsController.getTour);
 router.get('/login', authController.loggedIn, viewsController.getLoginForm);
